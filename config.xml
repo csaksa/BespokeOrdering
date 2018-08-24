@@ -28,6 +28,21 @@
     <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
     <platform name="android">
+      <icon src="icon.png"/>
+      <icon src="res/icon/android/icon-36-ldpi.png" gap:qualifier="ldpi" gap:platform="android"/>
+      <icon src="res/icon/android/icon-48-mdpi.png" gap:qualifier="mdpi" gap:platform="android"/>
+      <icon src="res/icon/android/icon-72-hdpi.png" gap:qualifier="hdpi" gap:platform="android"/>
+      <icon src="res/icon/android/icon-96-xhdpi.png" gap:qualifier="xhdpi" gap:platform="android"/>
+      <icon src="res/icon/android/icon-144-xxhdpi.png" gap:qualifier="xxhdpi" gap:platform="android"/>
+      <icon src="res/icon/android/icon-192-xxxhdpi.png" gap:qualifier="xxxhdpi" gap:platform="android"/>
+      <gap:splash src="res/screen/android/screen-ldpi-portrait.png" gap:qualifier="port-ldpi" gap:platform="android"/>
+      <gap:splash src="res/screen/android/screen-mdpi-portrait.png" gap:qualifier="port-mdpi" gap:platform="android"/>
+      <gap:splash src="res/screen/android/screen-hdpi-portrait.png" gap:qualifier="port-hdpi" gap:platform="android"/>
+      <gap:splash src="res/screen/android/screen-xhdpi-portrait.png" gap:qualifier="port-xhdpi" gap:platform="android"/>
+      <gap:splash src="res/screen/android/screen-ldpi-landscape.png" gap:qualifier="land-ldpi" gap:platform="android"/>
+      <gap:splash src="res/screen/android/screen-mdpi-landscape.png" gap:qualifier="land-mdpi" gap:platform="android"/>
+      <gap:splash src="res/screen/android/screen-hdpi-landscape.png" gap:qualifier="land-hdpi" gap:platform="android"/>
+      <gap:splash src="res/screen/android/screen-xhdpi-landscape.png" gap:qualifier="land-xhdpi" gap:platform="android"/>
     </platform>
     <platform name="ios">
     </platform>
