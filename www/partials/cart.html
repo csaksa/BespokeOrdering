@@ -1,0 +1,106 @@
+
+	<div id="cart" class="modal-menu cart">
+
+		<a class="close2" ng-click="closeCartPanel()"><i class="glyphicon glyphicon-remove"></i></a>
+
+		<div class="modal-header">
+			<span translate="i18n_cart_pagetitle" class="b"></span>
+
+			<div style="float:right">
+				<div class="r" style="margin-bottom:10px;">
+					<button ng-click="orderNewLine(); closeCartPanel();" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i> <span translate="i18n_cart_btn_newproduct"></span></button>
+					<button class="btn btn-danger btn-sm" ng-click="orderDeleteOrder()" ng-show="orderCartProducts > 0"><i class="glyphicon glyphicon-trash"></i> <span translate="i18n_cart_deleteorder"></span></button>
+					<button class="btn btn-warning btn-sm" ng-click="cartTabsSelectMeasurementsTab()" ng-show="orderCartProducts > 0 && orderCurrentMeasurementsId == null"><i class="glyphicon glyphicon-ok"></i> <span translate="i18n_cart_measurements_fill"></span></button>
+					<button class="btn btn-warning btn-sm" ng-click="cartTabsSelectPhotosTab()" ng-show="orderCartProducts > 0 && orderCurrentMeasurementsId > 0 && !order_cart_photos"><i class="glyphicon glyphicon-ok"></i> <span translate="i18n_cart_photos_take"></span></button>
+					<!--<button class="btn btn-success btn-sm" ng-click="cartValidateOrder()" ng-show="orderCartProducts > 0 && orderCurrentMeasurementsId > 0 && order_cart_photos"><i class="glyphicon glyphicon-ok"></i> <span translate="i18n_cart_validateorder"></span></button>-->
+					<button class="btn btn-success btn-sm" ng-click="orderReviewOrder()" ng-show="orderCartProducts > 0 && orderCurrentMeasurementsId > 0 && order_cart_photos"><i class="glyphicon glyphicon-ok"></i> <span translate="i18n_cart_revieworder"></button>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal-body" style="margin-top:0px; padding-bottom:0;">
+
+			<uib-tabset>
+
+				<uib-tab heading="{{'i18n_cart_products' | translate}}" active="cartTabsIsActive[0].active">
+					<ngcart-cart></ngcart-cart>
+				</uib-tab>
+
+				<uib-tab heading="{{'i18n_cart_measurements' | translate}}" active="cartTabsIsActive[1].active">
+
+					<div ng-show="orderCurrentMeasurementsId == null" class="alert alert-info" role="alert" style="margin:30px 20px 0 20px;" translate="i18n_cart_measurements_pleasechoose"></div>
+
+					<br>
+					<br>
+					<br>
+					<br>
+					<table style="width:100%;">
+						<tr>
+							<td class="c" style="text-align:center;">
+
+								<center>
+								<select ng-model="orderCurrentMeasurementsId" class="form-control" style="width:245px;" ng-change="orderAsignMeasurementsToOrder(orderCurrentMeasurementsId)">
+									<option value="null" ng-selected="orderCurrentMeasurementsId == null" translate="i18n_cart_measurements_choose"></option>
+									<option ng-repeat="measurements2 in measurements" value="{{measurements2.id}}" ng-selected="orderCurrentMeasurementsId == measurements2.id">{{measurements2.date}} &nbsp;&nbsp; {{measurements2.silhouette_weight}} {{measurements2.unit_weight}} &nbsp;&nbsp; (ID: {{measurements2.id}})</option>
+								</select></center>
+
+							</td>
+							<td>&nbsp;<span translate="i18n_cart_measurements_or"></span>&nbsp;</td>
+							<td class="c">
+
+								<button ng-click="orderGoMeasurements();" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> <span translate="i18n_cart_measurements_createnew"></span></button>
+
+							</td>
+						</tr>
+					</table>
+
+				</uib-tab>
+
+				<uib-tab heading="{{'i18n_cart_photos' | translate}}" active="cartTabsIsActive[2].active">
+
+					<div class="alert alert-info" role="alert" style="margin:30px 20px 0 20px;" translate="i18n_cart_photos_pleasetake"></div>
+
+					<table class="c" style="width:100%">
+						<thead>
+							<tr>
+								<td colspan="3">&nbsp;</td>
+							</tr>
+							<tr>
+								<td colspan="3">&nbsp;</td>
+							</tr>
+							<tr>
+								<th class="c" translate="i18n_client_photos_front"></th>
+								<th class="c" translate="i18n_client_photos_side"></th>
+								<th class="c" translate="i18n_client_photos_back"></th>
+							</tr>
+							<tr>
+								<td colspan="3">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="33.333%" style="padding:0 5px;"><img id="photo_front" ng-click="orderCapturePhoto('photo_front', clients[0].id)" ng-src="{{clients[0].photo_front_src}}" width="100%"></td>
+								<td width="33.333%" style="padding:0 5px;"><img id="photo_side" ng-click="orderCapturePhoto('photo_side', clients[0].id)" ng-src="{{clients[0].photo_side_src}}" width="100%"></td>
+								<td width="33.333%" style="padding:0 5px;"><img id="photo_back" ng-click="orderCapturePhoto('photo_back', clients[0].id)" ng-src="{{clients[0].photo_back_src}}" width="100%"></td>
+							</tr>
+						</thead>
+					</table>
+				</uib-tab>
+
+			</uib-tabset>
+
+		</div>
+
+		<div class="modal-footer c">
+
+			<!--<div ng-hide="orderCartEmpty" style="z-index:500;">
+[{{orderCartProducts}}/{{orderCurrentMeasurementsId}}/{{order_cart_photos}}]
+
+				<button class="btn btn-danger" ng-click="orderDeleteOrder()"><i class="glyphicon glyphicon-trash"></i> <span translate="i18n_cart_deleteorder"></span></button>
+				<button class="btn btn-success" ng-click="cartTabsSelectMeasurementsTab()" ng-hide="cartTabsIsActive[1].active"><i class="glyphicon glyphicon-ok"></i> <span translate="i18n_cart_measurements_fill"></span></button>
+				<button class="btn btn-success" ng-click="cartTabsSelectPhotosTab()" ng-hide="order_cart_photos"><i class="glyphicon glyphicon-ok"></i> <span translate="i18n_cart_photos_take"></span></button>
+				<button class="btn btn-success" ng-click="cartValidateOrder()" ng-hide="orderCurrentMeasurementsId==null || order_cart_photos==true"><i class="glyphicon glyphicon-ok"></i> <span translate="i18n_cart_validateorder"></span></button>
+
+			</div>-->
+
+		</div>
+
+	</div>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="msapplication-tap-highlight" content="no" />
+		<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+		<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+		<!--<meta name="viewport" content=" height=device-height," />-->
+		<!--<meta name="viewport" content="user-scalable=0, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=device-dpi" />-->
+		<meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0, height=device-height" />
+		<title>Bespoke Ordering</title>
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/buttons.css" />
+		<link rel="stylesheet" type="text/css" href="vendors/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" ng-href="themes/{{theme_directory}}/main.css" />
+		<link rel="stylesheet" type="text/css" href="vendors/angular-aside/dist/css/angular-aside.min.css"/>
+		<link rel="stylesheet" type="text/css" href="vendors/ngDialog/ngDialog.css"/>
+		<link rel="stylesheet" type="text/css" href="vendors/ngDialog/ngDialog-theme-default.css"/>
+		<link rel="stylesheet" type="text/css" href="vendors/ngDialog/ngDialog-theme-flat.css"/>
+		<link rel="stylesheet" type="text/css" href="vendors/ngDialog/ngDialog-theme-plain.css"/>
+		<link rel="stylesheet" type="text/css" href="vendors/ngDialog/ngDialog-theme-custom.css"/>
+	</head>
+
+	<body class="platform-{{device_platform}}" ng-controller="MainCtrl" onload="onLoad()" style="background-color:#000;">
+
+	<!--	<div data-role="header" id="header" ng-show="settings_product_key != ''"> -->
+		<div data-role="header" id="header">
+			<button ng-hide="menuShow == false" id="header-btn-menu" class="header-btn-menu btn btn-default btn-lg ng-cloak" type="button" ng-click="openAside('left', true, 'menu.html', 'sm')"><i class="glyphicon glyphicon-menu-hamburger"></i> <span translate="i18n_menu_btn_menu"></span></button>
+
+			<h1 id="header-title" class="ng-cloak">{{h1}}</h1>
+
+			<button id="header-btn-cart" class="header-btn-cart btn btn-default btn-lg ng-cloak" type="button" ng-show="orderCartShow" ng-click="rootLoadCart(); openAside('right', true, 'cart.html', 'md')"><i class="glyphicon glyphicon-shopping-cart"></i> <span translate="i18n_menu_btn_cart"></span> <span class="badge"><ngcart-summary></ngcart-summary></span></button>
+
+			<div id="header-saving-status" class="ng-cloak">
+				{{database_saving_status}}
+			</div>
+
+			<div id="header-bg"></div>
+
+		</div>
+
+		<div id="view-container" ng-view=""></div>
+
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="vendors/angular/1.4.0/angular.min.js"></script>
+		<script type="text/javascript" src="vendors/angular/1.4.0/angular-route.min.js"></script>
+		<script type="text/javascript" src="vendors/angular/1.4.0/angular-touch.min.js"></script>
+		<script type="text/javascript" src="vendors/angular-aside/dist/js/angular-aside.min.js"></script>
+		<script type="text/javascript" src="vendors/angular-translate/angular-translate.min.js"></script>
+		<script type="text/javascript" src="vendors/ngDialog/ngDialog.min.js"></script>
+		<script type="text/javascript" src="vendors/ui-bootstrap/ui-bootstrap-tpls-0.14.3.min.js"></script>
+		<script type="text/javascript" src="vendors/jquery/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="vendors/FileSaver/FileSaver.js"></script>
+		<script type="text/javascript" src="vendors/jsPDF/jspdf.js"></script>
+		<script type="text/javascript" src="vendors/jsPDF/plugins/addimage.js"></script>
+		<script type="text/javascript" src="vendors/jsPDF/plugins/from_html.js"></script>
+		<script type="text/javascript" src="vendors/jsPDF/plugins/split_text_to_size.js"></script>
+		<script type="text/javascript" src="vendors/jsPDF/plugins/standard_fonts_metrics.js"></script>
+		<script type="text/javascript" src="vendors/jsPDF/plugins/cell.js"></script>
+		<script type="text/javascript" src="vendors/jsPDF/plugins/autotable.js"></script>
+		<script type="text/javascript" src="js/cart.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/controllers/client.js"></script>
+		<script type="text/javascript" src="js/controllers/order.js"></script>
+		<script type="text/javascript" src="js/controllers/orderfast.js"></script>
+		<script type="text/javascript" src="js/controllers/settings.js"></script>
+		<script type="text/javascript" src="js/i18n.js"></script>
+
+    </body>
+</html>

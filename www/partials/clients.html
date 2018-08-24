@@ -1,0 +1,41 @@
+
+	<div data-role="page" id="page-clients" class="container">
+
+		<div class="row view-bar">
+
+			<div class="filter-bar" style="display:inline-block;">
+
+				<form class="form-inline" style="padding-top:5px;">
+
+					<label><span translate="i18n_clientlist_search"></span> <input type="search" class="form-control" ng-change="clientsDisplayClients()" ng-model="clients_filter_search" placeholder="{{'i18n_clientlist_search_placeholder' | translate}}"></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+					<label><span translate="i18n_clientlist_sort"></span> <select class="form-control" ng-change="clientsDisplayClients()" ng-model="clients_filter_order">
+						<option value="orders_lastdate" translate="i18n_clientlist_sort_bylastorder"></option>
+						<option value="lastname" translate="i18n_clientlist_sort_byname"></option>
+					</select></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+					<label><span translate="i18n_clientlist_showinactive"></span> <input type="checkbox" class="form-control" ng-change="clientsDisplayClients()" ng-model="searchInactive"></label>
+
+				</form>
+
+			</div>
+
+			<div class="buttons">
+				<a href="#/clients-client-new?do=newclient" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-plus"></i> <span translate="i18n_clientlist_btn_addnew"></span></a>
+			</div>
+
+			<div class="clear"></div>
+
+		</div>
+
+		<div class="row">
+			<div class="clients-grid">
+
+				<a href="{{client.goto}}" class="btn btn-primary btn-lg" ng-class="{0:'fakedisabled'}[client.active]" ng-repeat="client in clientsFiltered | filter:client.active"><span class="photo"><img ng-src="{{client.photo_src}}"></span><span class="id">{{client.id}}</span><span class="text"><strong>{{client.firstname}}<br>{{client.lastname}}</strong><span style="display:none;"><br><span translate="i18n_clientlist_client_lastorder"></span> {{client.lastorderdate}}</span></span></a> 
+
+			</div>
+		</div>
+
+		<div ng-show="clients_grid_total_clients > clients_grid_perpage" style="position:absolute; bottom:0; left:28px;"><uib-pagination data-ng-click="clientsGridChangePage(clients_grid_currentpage)" direction-links="false" total-items="clients_grid_total_clients" items-per-page="clients_grid_perpage" ng-model="clients_grid_currentpage" num-pages="smallnumPages"></uib-pagination></div>
+
+	</div>

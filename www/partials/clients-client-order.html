@@ -1,0 +1,52 @@
+
+	<div id="cart" class="modal-menu cart">
+
+		<a class="close2" ng-click="cancel()"><i class="glyphicon glyphicon-remove"></i></a>
+
+		<div class="modal-header">
+			<span translate="i18n_orders_order_title"></span> {{ order[0].order_number }}
+		</div>
+
+		<div class="modal-body">
+
+			<table class="table">
+				<tr>
+					<!--<th style="border:none;" translate="i18n_orders_order_col_sharp"></th>-->
+					<th style="border:none;" translate="i18n_orders_order_col_product"></th>
+					<th style="border:none;" translate="i18n_orders_order_col_fabric"></th>
+					<th style="border:none;" class="c" translate="i18n_orders_order_col_quantity"></th>
+					<th style="border:none;" class="c" translate="i18n_orders_order_col_status"></th>
+					<!--<th style="border:none;"></th>-->
+				</tr>
+				<tr ng-repeat="line in order_lines track by $index">
+					<!--<td style="vertical-align:middle;">{{ $index + 1 }}</td>-->
+					<td style="vertical-align:middle;"><span ng-show="line.parent_id != ''" style="display:inline-block; width:25px; position:relative;"><span style="display:block; position:absolute; top:-20px; left:5px;">&#8627;</span></span>{{ line.name2 }}</td>
+					<td style="vertical-align:middle;">{{ line.fabric_id }}</td>
+					<td style="vertical-align:middle;" class="c">{{ line.quantity }}</td>
+					<td style="vertical-align:middle;" class="c">{{ line.status2 }}</td>
+					<!--<td style="white-space:nowrap; width:1px;">
+						<button ng-click="" class="btn btn-warning"><i class="glyphicon glyphicon-mail"></i></button>
+					</td>-->
+				</tr>
+			</table>
+
+		</div>
+
+		<div class="modal-footer c">
+
+			<div ng-show="order[0].order_status != 'cart' && current_page == 'sales'" class="option-group controls form-inline c">
+				<label><span translate="i18n_orders_order_paymentstatus"></span></label>
+				<select ng-model="payment_status" class="form-control" ng-change="clientsOrdersUpdatePaymentStatus(order[0].id, payment_status)">
+					<option value="unpaid" translate="i18n_paymentstatus_unpaid"></option>
+					<option value="partiallypaid" translate="i18n_paymentstatus_partiallypaid"></option>
+					<option value="paid" translate="i18n_paymentstatus_paid"></option>
+					<option value="free" translate="i18n_paymentstatus_free"></option>
+					<option value="refunded" translate="i18n_paymentstatus_refunded"></option>
+				</select>
+			</div>
+
+			<!--<button ng-show="order[0].order_status == 'cart'" class="btn btn-danger" ng-click="clientsOrdersDeleteOrder(order[0].id)"><i class="glyphicon glyphicon-trash"></i> <span translate="i18n_cart_deleteorder"></span></button>-->
+			<a ng-show="order[0].order_status == 'cart'" href="#/order?client_id={{order[0].client_id}}&order_id={{order[0].id}}&opencart=1" class="btn btn-warning" ng-click="cancel()"><i class="glyphicon glyphicon-pencil"></i> <span translate="i18n_orders_order_btn_editcart"></span></a>
+		</div>
+
+	</div>

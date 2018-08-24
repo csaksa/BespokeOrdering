@@ -1,0 +1,18 @@
+
+	<div id="orderreview" class="ngdialog-message">
+
+		<h3 translate="i18n_orderreview_pleasereview"></h3>
+
+		<div class="review-container">
+
+			<div id="orderreview-table" ng-bind-html="orderReviewOrderDisplayOrder()"></div>
+
+			<div style="padding:15px 0 15px 0;">
+				<button class="btn btn-danger" style="float:left;" ng-click="closeThisDialog()"><i class="glyphicon glyphicon-share-alt glyphicon-flip-horizontal"></i> <span translate="i18n_common_btn_cancel"></span></button>
+				<button class="btn btn-success" style="float:right;" ng-click="cartValidateOrder()"><i class="glyphicon glyphicon-ok"></i> <span translate="i18n_orderreview_btn_transmit"></span></button>
+				<div class="clear"></div>
+			</div>
+
+		</div>
+
+	</div>

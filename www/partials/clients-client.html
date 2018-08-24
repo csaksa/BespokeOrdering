@@ -1,0 +1,157 @@
+	<div data-role="page" id="page-client" class="container">
+
+		<div class="row view-bar">
+
+			<div class="buttons" ng-show="clients[0].active">
+				<button class="btn btn-danger btn-lg" ng-click="clientHide(clients[0].id, clients[0].active)"><i class="glyphicon glyphicon-folder-close"></i> <span translate="i18n_client_btn_hide"></span></button>
+				<a href="#/clients-client-edit?do=editclient&client_id={{clients[0].id}}" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-pencil"></i> <span translate="i18n_client_btn_edit"></span></a>
+			</div>
+			<div class="buttons" ng-hide="clients[0].active">
+				<button class="btn btn-danger btn-lg" ng-click="clientHide(clients[0].id, clients[0].active)"><i class="glyphicon glyphicon-folder-open"></i> &nbsp;<span translate="i18n_client_btn_unhide"></span></button>
+			</div>
+
+			<h2 class="txtonbg">{{clients[0].fullname}}</h2>
+
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-padding-2cols-left" style="padding-top:30px;">
+
+				<uib-tabset justified="true">
+					<uib-tab heading="{{'i18n_client_orders' | translate}}" active="true">
+
+						<div ng-show="orders_total_orders == 0" style="text-align:center;padding-top:130px;">
+							<a href="#/order?client_id={{clients[0].id}}" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-plus"></i> <span translate="i18n_client_orders_btn_neworder"></span></a>
+						</div>
+						<div ng-show="orders_total_orders > 0" class="panel-heading">
+							<a href="#/order?client_id={{clients[0].id}}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i> <span translate="i18n_client_orders_btn_neworder"></span></a>
+						</div>
+						<table ng-show="orders_total_orders > 0" class="table c">
+							<thead>
+								<tr>
+									<th translate="i18n_client_orders_orderdate"></th>
+									<th translate="i18n_client_orders_ordernumber"></th>
+									<th translate="i18n_client_orders_status"></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="order in ordersFiltered">
+									<td>{{order.ordered_date}}</td>
+									<td>{{order.order_number}}</td>
+									<td>{{order.order_status2}}</td>
+									<td width="1" style="white-space:nowrap;">
+										<a href="#/order?client_id={{client_id}}&order_id={{order.id}}&opencart=1" class="btn btn-warning" ng-class="order.order_status != 'cart' ? 'disabled':''"><i class="glyphicon glyphicon-pencil"></i></a>
+										<a ng-click="clientsDisplayOrderPanel(order.id)" class="btn btn-success"><i class="glyphicon glyphicon-eye-open"></i></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div ng-show="orders_total_orders > orders_perpage" style="position:absolute; bottom:0px; left:5px;"><uib-pagination data-ng-click="clientOrdersChangePage(orders_currentpage)" direction-links="false" total-items="orders_total_orders" items-per-page="orders_perpage" ng-model="orders_currentpage" num-pages="smallnumPages" class=""></uib-pagination></div>
+
+					</uib-tab>
+					<uib-tab heading="{{'i18n_client_measurements' | translate}}" active="false">
+
+						<div ng-show="measurements_total_measurements == 0" style="text-align:center;padding-top:130px;">
+							<a href="#/measurements?client_id={{clients[0].id}}&measurements_id=new" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-plus"></i> <span translate="i18n_client_measurements_btn_newmeasurements"></span></a>
+						</div>
+						<div ng-show="measurements_total_measurements > 0" class="panel-heading">
+							<a href="#/measurements?client_id={{clients[0].id}}&measurements_id=new" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i> <span translate="i18n_client_measurements_btn_newmeasurements"></span></a>
+						</div>
+						<table ng-show="measurements_total_measurements > 0" class="table c">
+							<thead>
+								<tr>
+									<th class="l" translate="i18n_client_measurements_date"></th>
+									<th translate="i18n_client_measurements_type"></th>
+									<th translate="i18n_client_measurements_units"></th>
+									<th translate="i18n_client_measurements_weight"></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="measurement in measurementsFiltered">
+									<td class="l">{{measurement.date}}</td>
+									<td>{{measurement.type2}}</td>
+									<td>{{measurement.units}}</td>
+									<td>{{measurement.silhouette_weight}}</td>
+									<td width="1" style="white-space:nowrap;"><a href="#/measurements?client_id={{clients[0].id}}&measurements_id={{measurement.id}}" class="btn btn-success"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+								</tr>
+							</tbody>
+						</table>
+						<div ng-show="measurements_total_measurements > measurements_perpage" style="position:absolute; bottom:5px; left:10px;"><uib-pagination data-ng-click="measurementsChangePage(measurements_currentpage)" direction-links="false" total-items="measurements_total_measurements" items-per-page="measurements_perpage" ng-model="measurements_currentpage" num-pages="smallnumPages" class=""></uib-pagination></div>
+
+					</uib-tab>
+					<uib-tab heading="{{'i18n_client_photos' | translate}}" active="false">
+
+						<div style="padding-top:20px;">
+							<table class="c">
+								<thead>
+									<tr>
+										<td colspan="3">&nbsp;</td>
+									</tr>
+									<tr>
+										<td colspan="3">&nbsp;</td>
+									</tr>
+									<tr>
+										<th class="c" translate="i18n_client_photos_front"></th>
+										<th class="c" translate="i18n_client_photos_side"></th>
+										<th class="c" translate="i18n_client_photos_back"></th>
+									</tr>
+									<tr>
+										<td colspan="3">&nbsp;</td>
+									</tr>
+									<tr>
+										<td width="33.333%" style="padding:0 5px;"><img id="photo_front" ng-click="photoCapturePhoto('photo_front', clients[0].id)" ng-src="{{clients[0].photo_front_src}}" width="100%"></td>
+										<td width="33.333%" style="padding:0 5px;"><img id="photo_side" ng-click="photoCapturePhoto('photo_side', clients[0].id)" ng-src="{{clients[0].photo_side_src}}" width="100%"></td>
+										<td width="33.333%" style="padding:0 5px;"><img id="photo_back" ng-click="photoCapturePhoto('photo_back', clients[0].id)" ng-src="{{clients[0].photo_back_src}}" width="100%"></td>
+									</tr>
+								</thead>
+							</table>
+						</div>
+
+					</uib-tab>
+				</uib-tabset>
+
+			</div>
+
+			<div class="col-xs-6 col-padding-2cols-right client-details txtonbg">
+
+				<br>
+				<br>
+				<div class="form-group">
+					<label translate="i18n_client_phone"></label>
+					{{clients[0].phone}}<!--<a href="tel:{{clients[0].phone}}">{{clients[0].phone}}</a>-->
+				</div>
+
+				<div class="form-group">
+					<label translate="i18n_client_email"></label>
+					{{clients[0].email}}<!--<a href="mailto:{{clients[0].email}}">{{clients[0].email}}</a>-->
+				</div>
+
+				<div class="form-group" style="width:300px;">
+					<label translate="i18n_client_address"></label>
+					<div>{{clients[0].street1}} {{clients[0].street2}}</div>
+					<div>{{clients[0].city}} {{clients[0].postalcode}}</div>
+					<div>{{clients[0].country2}} {{clients[0].state}}</div>
+				</div>
+
+				<div class="form-group">
+					<label translate="i18n_client_dob"></label>
+					{{clients[0].dob2}}
+				</div>
+				<!--<div class="form-group">
+					<label translate="i18n_client_applanguage"></label>
+					{{clients[0].app_language}}
+				</div>
+
+				<div class="form-group">
+					<label translate="i18n_client_notes"></label>
+					{{clients[0].notes}}
+				</div>-->
+
+			</div>
+		</div>
+
+		<div class="photo-face"><img id="photo" ng-click="photoCapturePhoto('photo', clients[0].id)" ng-src="{{clients[0].photo_src}}"></div>
+
+	</div>

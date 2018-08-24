@@ -1,0 +1,44 @@
+TODO IN 0.6.5
+
+  - Save the app version into database if current app version is different from app version in the database 
+
+
+TODO IN LATER MILESTONES
+  - sur nouveau panier, premier produit, fin de custo, clic gros bouton, cela ouvre le popup, changer pour ouvrir l'overlay et la tabs measurements ou photos
+  - Fixes light theme
+
+
+
+NEXT MILESTONES -------------------------------
+	1.0.00 Final release including all V1 functionnalities 
+	0.8.00 Release including order status synching
+	0.7.00 Release including odoo API integration
+
+
+Target iOS V1
+
+ - Menu bug on iOS, after doing some things, when we clic on some menu options, the app reload the same page
+
+
+Later
+
+ - Force picture orientation for client pictures
+
+ - prendre la version de l'appli à partir de l'appli...
+	https://build.phonegap.com/plugins/940
+
+ - limiter la diffusion sur téléphone, seuelement sur tablette
+	http://docs.build.phonegap.com/en_US/configuring_config_file_element.md.html#Config%20File%20Elements
+	<supports-screens android:anyDensity="true" android:resizeable="true" 
+    	android:smallScreens="true" 
+    	android:normalScreens="true" 
+    	android:largeScreens="true" 
+    	android:xlargeScreens="true" />
+ 
+ - hydrate app
+	http://docs.build.phonegap.com/en_US/tools_hydration.md.html#Hydration
+
+
+	<gap:plugin name="org.apache.cordova.contacts" source="npm" />
+
+	<gap:plugin name="org.apache.cordova.geolocation" source="npm" />

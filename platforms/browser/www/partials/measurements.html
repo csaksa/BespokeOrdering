@@ -1,0 +1,236 @@
+<!-- Prise de mesure du client -->
+	<div data-role="page" id="page-measurements" class="container">
+
+	<form name="measurementsForm" novalidate>
+
+		<input type="hidden" name="client_id" class="form-control" value="{{client_id}}">
+
+		<div class="row view-bar">
+
+			<div class="buttons">
+				<a class="btn btn-danger btn-lg" ng-click="clientMeasurementsCancel()"><i class="glyphicon glyphicon-share-alt glyphicon-flip-horizontal"></i><span ng-hide="measurements_id>0"> <span translate="i18n_client_btn_cancel"></span></span></a><!---->
+				<a class="btn btn-danger btn-lg" ng-show="measurements_id>0" ng-click="clientMeasurementsHide()"><i class="glyphicon glyphicon-trash"></i></a><!-- <span translate="i18n_common_btn_delete"></span>-->
+				<a class="btn btn-success btn-lg" ng-click="clientMeasurementsSave('save')"><i class="glyphicon glyphicon-ok"></i> <span translate="i18n_common_btn_save"></span></a>
+				<a class="btn btn-success btn-lg" ng-show="measurements_id>0" ng-click="clientMeasurementsSave('copy')"><i class="glyphicon glyphicon-ok"></i> <span translate="i18n_common_btn_saveacopy"></span></a>
+			</div><!-- ng-disabled="clientForm.$invalid"-->
+			<div class="units_panel">
+				<div class="btn-group btn-minwidth70">
+					<label class="btn btn-primary" ng-model="measurements_unitsize" uib-btn-radio="'cm'">cm</label>
+					<label class="btn btn-primary" ng-model="measurements_unitsize" uib-btn-radio="'in'">inches</label>
+				</div>
+				<div class="btn-group btn-minwidth70">
+					<label class="btn btn-primary" ng-model="measurements_unitweight" uib-btn-radio="'kg'">kg</label>
+					<label class="btn btn-primary" ng-model="measurements_unitweight" uib-btn-radio="'lb'">pounds</label>
+				</div>
+			</div>
+
+			<div class="clear"></div>
+
+		</div>
+
+		<div class="row" style="margin-top:15px;">
+
+			<div class="col-xs-3 plr0">
+
+				<table class="measurements-table">
+					<caption class="txtonbg" translate="i18n_measurements_jacket"></caption>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_jacket_neck"></th><!-- type="number" step="0.01" -->
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_jacket_neck" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_jacket_fullshoulder"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_jacket_fullshoulder" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_jacket_chest"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_jacket_chest" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_jacket_front"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_jacket_front" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_jacket_back"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_jacket_back" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_jacket_stomach"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_jacket_stomach" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+				</table>
+
+			</div>
+
+			<div class="col-xs-3 plr0">
+
+				<table class="measurements-table">
+					<caption>&nbsp;</caption>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_jacket_hips"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_jacket_hips" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_jacket_lengthfront"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_jacket_lengthfront" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_jacket_lengthback"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_jacket_lengthback" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_jacket_sleeve"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_jacket_sleeve" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_jacket_armsize"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_jacket_armsize" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_jacket_cuff"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_jacket_cuff" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+				</table>
+
+			</div>
+
+			<div class="col-xs-3 plr0">
+
+				<table class="measurements-table">
+					<caption class="txtonbg" translate="i18n_measurements_pants"></caption>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_pants_waist"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_pants_waist" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_pants_hips"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_pants_hips" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_pants_crotch"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_pants_crotch" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_pants_thigh"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_pants_thigh" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_pants_length"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_pants_length" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_pants_bottom"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_pants_bottom" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+				</table>
+
+			</div>
+
+			<div class="col-xs-3 plr0">
+
+				<table class="measurements-table">
+					<caption class="txtonbg" translate="i18n_measurements_waistcoat"></caption>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_waistcoat_lengthfront"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_waistcoat_lengthfront" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_waistcoat_lengthback"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_waistcoat_lengthback" autocomplete="off" autocorrect="off" placeholder="{{measurements_unitsize}}" required></span></td>
+					</tr>
+				</table>
+
+				<table class="measurements-table">
+					<caption class="txtonbg" translate="i18n_measurements_shoes"></caption>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_shoes_size"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_shoes_size" autocomplete="off" autocorrect="off" required></span></td>
+					</tr>
+				</table>
+
+			</div>
+
+		</div>
+
+		<div class="row" style="margin-top:15px;">
+
+			<div class="col-xs-3 plr0">
+
+				<table class="measurements-table">
+					<caption class="txtonbg" translate="i18n_measurements_silhouette"></caption>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_silhouette_height"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_silhouette_height" placeholder="{{measurements_unitsize}}" autocomplete="off" autocorrect="off" required></span></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_silhouette_weight"></th>
+						<td><span class="input-group"><input type="text" class="form-control" ng-model="measurements_silhouette_weight" placeholder="{{measurements_unitweight}}" autocomplete="off" autocorrect="off" required></span></td>
+					</tr>
+				</table>
+
+			</div>
+
+			<div class="col-xs-3 plr0">
+
+				<table class="measurements-table">
+					<caption>&nbsp;</caption>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_silhouette_shoulder"></th>
+						<td><select class="form-control" ng-model="measurements_silhouette_shoulder">
+								<option value="low" translate="i18n_measurements_silhouette_shoulder_low"></option>
+								<option value="normal" translate="i18n_measurements_silhouette_shoulder_normal"></option>
+								<option value="high" translate="i18n_measurements_silhouette_shoulder_high"></option>
+							</select></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_silhouette_neck"></th>
+						<td><select class="form-control" ng-model="measurements_silhouette_neck">
+								<option value="short" translate="i18n_measurements_silhouette_neck_short"></option>
+								<option value="normal" translate="i18n_measurements_silhouette_neck_normal"></option>
+								<option value="long" translate="i18n_measurements_silhouette_neck_long"></option>
+							</select></td>
+					</tr>
+				</table>
+
+			</div>
+
+			<div class="col-xs-3 plr0">
+
+				<table class="measurements-table">
+					<caption>&nbsp;</caption>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_silhouette_posture"></th>
+						<td><select class="form-control" ng-model="measurements_silhouette_posture">
+								<option value="bentforward" translate="i18n_measurements_silhouette_posture_bentforward"></option>
+								<option value="normal" translate="i18n_measurements_silhouette_posture_normal"></option>
+								<option value="reverse" translate="i18n_measurements_silhouette_posture_reverse"></option>
+							</select></td>
+					</tr>
+					<tr>
+						<th class="txtonbg" translate="i18n_measurements_silhouette_chest"></th>
+						<td><select class="form-control" ng-model="measurements_silhouette_chest">
+								<option value="muscular" translate="i18n_measurements_silhouette_chest_muscular"></option>
+								<option value="normal" translate="i18n_measurements_silhouette_chest_normal"></option>
+								<option value="rotund" translate="i18n_measurements_silhouette_chest_rotund"></option>
+							</select></td>
+					</tr>
+				</table>
+
+			</div>
+
+			<div class="col-xs-3 plr0">
+
+				<table class="measurements-table">
+					<caption class="txtonbg" style="padding-left:40px;" translate="i18n_measurements_comments"></caption>
+					<tr>
+						<td><textarea class="form-control" ng-model="measurements_comments"></textarea></td>
+					</tr>
+				</table>
+
+			</div>
+
+		</div>
+
+	</form>
+
+	</div>

@@ -1,0 +1,274 @@
+
+	<div data-role="page" id="page-settings" class="container">
+
+		<form>
+
+		<div class="row">
+
+			<uib-tabset justified="true">
+
+				<uib-tab heading="{{'i18n_settings_general' | translate}}" active="true">
+
+					<div class="col-xs-6 col-padding-2cols-left">
+
+						<div class="form-group form-group-switch">
+							<label for="settings_unitmeasurements" translate="i18n_settings_measurements"></label>
+							<div class="btn-group">
+								<label class="btn btn-primary" ng-model="settings_unitmeasurements_model" ng-change="settings_setting_save('unit_measurements', settings_unitmeasurements_model)" uib-btn-radio="'cm'">cm</label>
+								<label class="btn btn-primary" ng-model="settings_unitmeasurements_model" ng-change="settings_setting_save('unit_measurements', settings_unitmeasurements_model)" uib-btn-radio="'in'">inches</label>
+							</div>
+						</div>
+
+						<div class="form-group form-group-switch">
+							<label for="settings_unitheight" translate="i18n_settings_height"></label>
+							<div class="btn-group">
+								<label class="btn btn-primary" ng-model="settings_unitheight_model" ng-change="settings_setting_save('unit_height', settings_unitheight_model)" uib-btn-radio="'cm'">cm</label>
+								<label class="btn btn-primary" ng-model="settings_unitheight_model" ng-change="settings_setting_save('unit_height', settings_unitheight_model)" uib-btn-radio="'in'">inches</label>
+							</div>
+						</div>
+
+						<div class="form-group form-group-switch">
+							<label for="settings_unitweight" translate="i18n_settings_weight"></label>
+							<div class="btn-group">
+								<label class="btn btn-primary" ng-model="settings_unitweight_model" ng-change="settings_setting_save('unit_weight', settings_unitweight_model)" uib-btn-radio="'kg'">kg</label>
+								<label class="btn btn-primary" ng-model="settings_unitweight_model" ng-change="settings_setting_save('unit_weight', settings_unitweight_model)" uib-btn-radio="'lb'">pounds</label>
+							</div>
+						</div>
+
+						<div class="form-group form-group-switch">
+							<label for="settings_measurementsallowances" translate="i18n_settings_measurements_allowances"></label>
+							<div class="btn-group">
+								<label class="btn btn-primary" ng-model="settings_measurementsallowances_model" ng-change="settings_setting_save('measurements_allowances', settings_measurementsallowances_model)" uib-btn-radio="'true'"><span translate="i18n_common_btn_yes"></span></label>
+								<label class="btn btn-primary" ng-model="settings_measurementsallowances_model" ng-change="settings_setting_save('measurements_allowances', settings_measurementsallowances_model)" uib-btn-radio="'false'"><span translate="i18n_common_btn_no"></span></label>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="settings_applanguage" translate="i18n_settings_applanguage"></label>
+							<select id="settings_applanguage" ng-model="settings_applanguage_model" ng-change="settings_setting_save('app_language', settings_applanguage_model); changeLanguage(settings_applanguage_model)" class="form-control">
+								<option value="en_US" translate="i18n_settings_applanguage_en_US"></option>
+								<option value="en_UK" translate="i18n_settings_applanguage_en_UK"></option>
+								<option value="fr_FR" translate="i18n_settings_applanguage_fr_FR"></option>
+								<option value="es_ES" translate="i18n_settings_applanguage_es_ES"></option>
+								<option value="th_TH" translate="i18n_settings_applanguage_th_TH"></option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="settings_currency" translate="i18n_settings_currency"></label>
+							<select id="settings_currency" ng-model="settings_currency_model" ng-change="settings_setting_save('currency', settings_currency_model); changeCurrency(settings_currency_model)" class="form-control">
+								<option value="EUR">€</option>
+								<option value="USD">US$</option>
+							</select>
+						</div>
+
+					</div>
+
+					<div class="col-xs-6 col-padding-2cols-right">
+					</div>
+
+					<div class="clear"></div>
+
+				</uib-tab>
+<!-- Cette partie c'est le design -->
+				<uib-tab heading="{{'i18n_settings_design' | translate}}" active="false">
+
+					<div class="col-xs-6 col-padding-2cols-left">
+
+						<div class="form-group">
+							<label for="settings_theme" translate="i18n_settings_design_theme"></label>
+							<select id="settings_theme" ng-model="settings_theme_model" ng-change="settings_setting_save('theme', settings_theme_model); changeTheme(settings_theme_model)" class="form-control">
+								<option value="probespoke-dark" translate="i18n_settings_design_theme_dark"></option>
+								<option value="probespoke-light" translate="i18n_settings_design_theme_light"></option>
+							</select>
+						</div>
+
+						<div class="form-group" style="margin-top:50px;">
+							<label for="" translate="i18n_settings_design_customlogo"></label><br>
+							<img ng-click="settingsChooseLogo()" id="custom_logo" src="{{settings_UI_custom_logo}}" width="250" height="90" style="background:red;"><br><br>
+							<button ng-click="settingsRemoveCustom('logo')" class="btn btn-danger btn-xs" translate="i18n_settings_design_customremove"></button>
+						</div>
+
+					</div>
+
+					<div class="col-xs-6 col-padding-2cols-right">
+
+						<div class="form-group">
+							<label for="" translate="i18n_settings_design_custombackground"></label><br>
+							<img ng-click="settingsChooseBackground()" ng-show="settings_UI_custom_background != ''" id="custom_background" src="{{settings_UI_custom_background}}" width="440" height="270" style="background:red;">
+							<br><br>
+							<button ng-click="settingsRemoveCustom('background')" class="btn btn-danger btn-xs" translate="i18n_settings_design_customremove"></button>
+						</div>
+
+					</div>
+
+					<div class="clear"></div>
+
+				</uib-tab>
+<!-- Cette partie c'est le Progile  -->
+				<uib-tab heading="{{'i18n_settings_profile' | translate}}" active="false">
+
+					<div class="col-xs-6 col-padding-2cols-left">
+
+						<div class="form-group">
+							<label translate="i18n_settings_profile_company_name"></label>
+							<input type="text" class="form-control" ng-model="settings_company_name_model" disabled="disabled">
+						</div>
+
+						<div class="form-group">
+							<label translate="i18n_settings_profile_seller_fullname"></label>
+							<input type="text" class="form-control" ng-model="settings_seller_fullname_model" disabled="disabled">
+						</div>
+
+					</div>
+
+					<div class="col-xs-6 col-padding-2cols-right">
+
+					</div>
+
+					<div class="clear"></div>
+<!-- Page de Présentation de l'onglet Setting--> 
+				</uib-tab>
+<!-- Cette partie liste les différents produits à modifier -->
+				<uib-tab heading="{{'i18n_settings_products' | translate}}" active="false">
+
+					<div class="col-xs-6 col-padding-2cols-left">
+
+						<div class="form-group clear" ng-repeat="product in products">
+
+							<label class="checkbox-inline" style="line-height:46px; "><input type="checkbox" style="width:40px; height:40px;" class="form-control" ng-change="settingsProductsToggle(product.id, product.user_active_model)" ng-model="product.user_active_model"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{product.name}}</label>
+
+						</div>
+
+					</div>
+
+					<div class="col-xs-6 col-padding-2cols-right">
+					</div>
+
+					<div class="clear"></div>
+
+				</uib-tab>
+<!-- Cette partie Backup&Restore à modifier -->
+				<uib-tab heading="{{'i18n_settings_backuprestore' | translate}}" active="false">
+
+					<h2 translate="i18n_common_comingsoon" style="margin-top:150px;" class="c"></h2>
+
+					<div class="clear"></div>
+
+				</uib-tab>
+<!-- Cette partie  c'est les settings -->
+				<uib-tab heading="{{'i18n_settings_about' | translate}}" active="false">
+
+					<div class="col-xs-6 col-padding-2cols-left">
+
+						<div class="form-group">
+							<label translate="i18n_settings_productkey"></label>
+							<input type="text" class="form-control" ng-model="settings_productkey_model" disabled="disabled">
+						</div>
+
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label translate="i18n_settings_appversion"></label>
+									<input type="text" class="form-control" ng-model="settings_appversion_model" disabled="disabled"><!--app_version-->
+								</div>
+									</div>
+									<div class="col-xs-6">
+								<div class="form-group">
+									<label translate="i18n_settings_databaseversion"></label>
+									<input type="text" class="form-control" ng-model="settings_databaseversion_model" disabled="disabled">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label translate="i18n_settings_storagemethod"></label>
+							<input type="text" class="form-control" ng-model="settings_storagemethod_model" disabled="disabled">
+						</div>
+
+						<div class="form-group">
+							<label>UUID</label>
+							<input type="text" class="form-control" ng-model="device_uuid" disabled="disabled">
+						</div>
+
+						<div class="form-group">
+							<label>Device Model</label>
+							<input type="text" class="form-control" ng-model="device_model" disabled="disabled">
+						</div>
+
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>OS</label>
+									<input type="text" class="form-control" ng-model="device_platform" disabled="disabled">
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>OS Version</label>
+									<input type="text" class="form-control" ng-model="device_version" disabled="disabled">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label style="margin-top:20px; min-width:95px;">Activate DEV mode</label>
+							<div class="btn-group btn-minwidth70">
+								<label class="btn btn-primary" ng-model="settings_dev_mode_model" ng-change="settings_setting_save('dev_mode', settings_dev_mode_model)" uib-btn-radio="'1'">Yes</label>
+								<label class="btn btn-primary" ng-model="settings_dev_mode_model" ng-change="settings_setting_save('dev_mode', settings_dev_mode_model)" uib-btn-radio="'0'">No</label>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-xs-6 col-padding-2cols-right">
+
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>Company ID</label>
+									<input type="text" class="form-control" ng-model="settings_company_id_model" disabled="disabled">
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>Seller ID</label>
+									<input type="text" class="form-control" ng-model="settings_seller_id_model" disabled="disabled">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label>Supplier Gateway</label>
+							<input type="text" class="form-control" ng-model="settings_supplier_gateway_model" disabled="disabled">
+						</div>
+
+						<div class="form-group">
+							<label>Reseller Gateway</label>
+							<input type="text" class="form-control" ng-model="settings_reseller_gateway_model" disabled="disabled">
+						</div>
+
+					</div>
+
+					<div class="clear"></div>
+
+				</uib-tab>
+
+				<uib-tab heading="Dev" ng-show="settings_dev_mode_model == 1" active="false">
+
+					<div class="panel panel-default" style="margin:20px;">
+						<div class="panel-heading">Database</div>
+						<div id="page-dev-tables" style="color:#000;"></div>
+					</div>
+					<h3 style="margin:50px 0 20px 0;" class="c">Hey! If you click on the button below don't conplain that you lost all your data!</h2>
+					<div style="text-align:center;"><button ng-click="db_dropalltables()" class="btn btn-danger btn-lg">Drop all Tables</button><br>&nbsp;</div>
+
+				</uib-tab>
+
+			</uib-tabset>
+
+		</div>
+
+		</form>
+
+	</div>

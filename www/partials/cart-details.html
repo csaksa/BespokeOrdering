@@ -1,0 +1,58 @@
+
+<div class="alert alert-info" role="alert" ng-show="ngCart.getTotalItems() === 0" translate="i18n_cart_yourcartisempty" style="margin:30px 20px 0 20px;"></div>
+
+<div ng-show="ngCart.getTotalItems() > 0" style="height:500px; overflow:auto;">
+	<div class="cart-overflowded"></div>
+	<div class="cart-overflowded2"></div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<!--<th style="border:none;" translate="i18n_cart_col_sharp"></th>-->
+				<th style="border:none; padding-top:25px;"></th><!-- translate="i18n_cart_col_product"-->
+				<th style="border:none; padding-top:25px;" translate="i18n_cart_col_fabric"></th>
+				<th style="border:none;" class="c" translate="i18n_cart_col_status"></th>
+				<th style="border:none;" class="c" translate="i18n_cart_col_quantity"></th>
+				<th style="border:none;"></th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="item in ngCart.getCart().items track by $index">
+			<!--<td style="vertical-align:middle;">{{ $index + 1 }}</td>-->
+			<td style="vertical-align:middle;"><span ng-show="item.getParentId() != ''" style="display:inline-block; width:25px; position:relative;"><span style="display:block; position:absolute; top:-20px; left:5px;">&#8627;</span></span>{{ item.getName() }}</td>
+			<td style="vertical-align:middle;">{{ item.getFabric() }}</td>
+			<td style="vertical-align:middle;" class="c">
+				<i ng-if="item.getStep() == 'ready'" class="glyphicon glyphicon-ok"></i>
+				<span ng-if="item.getStep() != 'ready'">{{'i18n_cart_step' | translate}} {{ item.getStep() }}</span>
+			</td>
+			<td style="vertical-align:middle;" class="c"><span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}"
+					  ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp;
+				{{ item.getQuantity() | number }}&nbsp;&nbsp;
+				<span class="glyphicon glyphicon-plus" ng-click="item.setQuantity(1, true)"></span></td>
+			<td style="white-space:nowrap; width:1px;">
+				<button ng-click="ngCart.editItemById(item.getId())" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></button>
+				<button ng-click="ngCart.editFastItemById(item.getId())" class="btn btn-warning"><i class="glyphicon glyphicon-flash"></i></button>
+				<button ng-click="ngCart.removeItemById(item.getId())" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+				<span ng-hide="item.getProductTypeId() == 1" class="" ng-class="$index > 5 ? 'btn-group dropup':'btn-group'" uib-dropdown is-open="status.isopen"><button type="button" class="btn btn-success dropdown-toggle" uib-dropdown-toggle><span class="caret"></span></button>
+				<ul class="uib-dropdown-menu pull-right dropdown-success" role="menu">
+					<li role="menuitem"><a class="btn btn-link l" style="line-height:25px" ng-click="ngCart.copyItemById(item.getId())" translate="i18n_cart_product_duplicate"></a></li>
+					<li ng-hide="item.getParentId() != ''" class="divider"></li>
+					<li ng-hide="item.getParentId() != '' || item.getProductTypeId() == 3" role="menuitem"><a class="btn btn-link l" style="line-height:25px" ng-click="ngCart.matchingItemById(item.getId(), 3)" translate="i18n_cart_product_add_matchingjacket"></a></li>
+					<li ng-hide="item.getParentId() != '' || item.getProductTypeId() == 4" role="menuitem"><a class="btn btn-link l" style="line-height:25px" ng-click="ngCart.matchingItemById(item.getId(), 4)" translate="i18n_cart_product_add_matchingpants"></a></li>
+					<li ng-hide="item.getParentId() != '' || item.getProductTypeId() == 5" role="menuitem"><a class="btn btn-link l" style="line-height:25px" ng-click="ngCart.matchingItemById(item.getId(), 5)" translate="i18n_cart_product_add_matchingwaistcoat"></a></li>
+				</ul></span>
+				<button ng-show="item.getProductTypeId() == 1" type="button" class="btn btn-success" ng-click="ngCart.copyItemById(item.getId())"><i class="glyphicon glyphicon-plus"></i></button>
+			</td>
+		</tr>
+		</tbody>
+		<tr style="display:none;">
+			<!--<td></td>-->
+			<td></td>
+			<td></td>
+			<td class="c"><i class="glyphicon" ng-class="{'glyphicon-ok':ngCart.getReady() === true, 'glyphicon-ban-circle':ngCart.getReady() === false}"></i></td>
+			<td class="c">{{ ngCart.getTotalItems() }}</td>
+			<td></td>
+		</tr>
+	</table>
+
+</div>

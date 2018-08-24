@@ -1,0 +1,137 @@
+0.6.7
+  - Add Allowances setting in Settings
+  - 
+
+
+0.6.6 (2016-02-23)
+  - Fixes customer height locale
+
+
+0.6.5 (2016-02-20)
+  - Adds customer height unit in settings
+  - Fixes Cordova plugins names (config)
+  - Adds AndroidPersistentFileLocation (config)
+
+
+0.6.4 (2016-02-16)
+  - Fixes closing review panel on order submission
+  - Changes APP & DB version
+
+
+0.6.3 (2016-02-15)
+  - Fixes rewriting database update mechanism
+  - Adds confirmation request before deleting measurements
+  - Adds SAVE button in measurements to have SAVE and SAVE AS
+  - Removes the validate button a the end of product customization
+  - Adds orders review panel
+  - Fixes design dialog popups
+
+
+0.6.2 (2016-01-29)
+  - Fixes search client, remove invalid cars ' " %
+  - Fixes search order, remove invalid cars ' " %
+  - Fixes update settings array on setting change
+  - Fixes unit loading in measurements by adding timeout on starting function ????????
+  - Fixes database tables deletion on iOS
+  - Fixes change shirt page number to 16
+  - Fixes change jackets lining images to "-2" (fixed other images problems...)
+  - Adds send JSON to the ERP gateway
+  - Adds allow measurements deletion
+
+
+0.6.1 (2016-01-17)
+  - Fixes config.xml, target-device set to tablet
+
+
+0.6.0 (2015-11-10)
+  - Fixes Privacy Policy text & images
+
+
+0.5.23 (2015-11-10)
+  - Fixes in cart, updating client on photo return
+
+
+0.5.22 (2015-11-10)
+  - Removes fullscreen on android
+
+
+0.5.21 (2015-11-10)
+  - Adds Jacket Lapel Width option: 2.25 inch (5.71 cm)
+  - Fixes center app icons
+  - Adds Measurements & Photos tabs into cart
+  - Adds Settings, Sales, Purchases, Clients, Measurements pagetitles
+  - Fixes UI Bootstrap version 0.14.3 (directives changed)
+  - Roallback to classic keyboard in measurements due to vars type problems
+  - Fixes after photo change in order process, if clic load product, photo reset to loaded controller version (but correctly saved)
+
+
+0.5.20 (2015-10-27)
+  - Adds numeric keyboard in measurements form (Android only)
+  - Removes predictive keyboard on text fields for iOS (measurements, clients, ordering)
+  - Fixes blink product key form
+  - Fixes blink order debug and arrows
+  - Fixes option name truncated in customization
+  - Adds device information into settings page
+
+
+0.5.18 (2015-10-27)
+  - Fixes multi opening cart on loading cart from client view
+  - Fixes iOS customer save & update
+
+
+0.5.17
+  - Fixes connection.type check for dev version
+
+
+0.5.8
+  - Fixes whitelist plugin
+  - Removes Windows Phone from config file
+  - Fixes iOS plash screens
+
+
+0.5.7 (2015-10-21)
+  - Fixes missing parameter in config.xml to use Camera on iOS
+  - iOS alpha 2
+
+
+0.5.6
+  - Fixes customer ID in grid view was always 1 
+  - Fixes UI for nice view on all device platforms
+
+
+0.5.5 (2015-10-08)
+  - Fixes english locale
+  - Removes licence requirement
+  - iOS alpha 1
+
+
+0.5.4 (2015-09-23)
+  - Fixes company id and reseller id was not transmited on first app launch
+  - Fixes dob client in profil was NaN if empty
+  - Fixes on wrong product key
+  - Adds Customer ID where customer name appear
+  - Adds storage method in About
+  - Fixes english locale
+  - Fixes products images name case
+  - Fixes error messages in order customization
+
+
+0.5.3 (2015-09-22)
+  - Removes demo data
+  - Removes delete database on reinstall
+  - Adds licence sinching
+  - Adds new design for selected option
+  - Fixes products default option
+  - Fixes images options
+  - Fixes reloading product name translation after language app change
+  - Fixes closing cart panel on measurements loading
+  - Adds some french translations
+
+
+0.5.2 (2015-08-28)
+  - Fixes matched fabric_id on matching fabric_id change
+  - Fixes Cart update on loading cart
+
+
+0.5.1 (2015-08-24)
+  - First public release

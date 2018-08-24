@@ -1,0 +1,92 @@
+
+	<!--<div class="debug" ng-show="debug_level === 5">
+		<ul class="inline">
+			<li>Client Id: 		<strong ng-bind="orderCurrentClientId"></strong></li>
+			<li>Order Id: 		<strong ng-bind="orderCurrentOrderId"></strong></li>
+			<li>Order Line Id: 	<strong ng-bind="orderCurrentOrderLineId"></strong></li>
+			<li>Product Id: 	<strong ng-bind="orderCurrentProductId"></strong></li>
+			<li>Product Steps: 	<strong ng-bind="orderCurrentProductSteps"></strong></li>
+			<li>Screen Id: 		<strong ng-bind="orderCurrentScreen"></strong></li>
+			<li>Show Cart: 		<strong ng-bind="orderCartShow"></strong></li>
+			<li>Cart Products: 	<strong ng-bind="orderCartProducts"></strong></li>
+			<li>Progress: 		<strong ng-bind="orderCartProducts"></strong></li>
+		</ul>
+	</div>-->
+
+
+	<div data-role="page" id="page-order-products" ng-show="show_products_page">
+
+		<div class="products-grid">
+			<div class="cell">
+			<a ng-repeat="product in products" ng-show="product.user_active == 1" ng-click="orderStartCustomization(product.id, 1)"><img ng-src="img/products/{{product.id}}/{{product.id}}.png"></a>
+			</div>
+			<label class="checkbox-inline" style="line-height:46px; "><input type="checkbox" style="width:40px; height:40px;" class="form-control" ng-change="settingsFastCustomisation()" ng-model="product.user_active_model"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Personalisation Rapide</label>
+		</div>
+
+	</div>
+
+
+	<div data-role="page" id="page-order-customize" ng-if="show_customize_page == true">
+
+		<div class="screen">
+
+			<div class="previous"><button ng-show="show_previousbtn" class="btn btn-primary btn-lg" ng-click="orderChangeScreen('previous')"></button></div>
+
+			<form name="productForm">
+			<div id="options-grid">
+
+			</div>
+			</form>
+
+			<div ng-show="show_endofcustomization" class="endofcustomization">
+				<h2 translate="i18n_customize_finished_congrats"></h2>
+
+				<div><button ng-click="orderNewLine()" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-plus"></i> <span translate="i18n_cart_btn_newproduct"></span></button><!-- &nbsp;&nbsp;&nbsp;
+				<button class="btn btn-success btn-lg" ng-click="cartValidateOrder();"><i class="glyphicon glyphicon-ok"></i> <span translate="i18n_cart_validateorder"></span></button>--></div>
+
+			</div>
+
+			<div class="next"><button ng-show="show_nextbtn" class="btn btn-primary btn-lg" ng-click="orderChangeScreen('next')"></button></div>
+
+		</div>
+<!--
+		<div ng-show="show_progressbar" class="progress">
+
+			<div class="progress-bar" role="progressbar" aria-valuenow="{{progressPercentage}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{progressPercentage}}%;">
+				{{progressPercentage}}%
+			</div>
+
+		</div>
+-->
+		<div class="clear"></div>
+
+	</div>
+
+
+	<div data-role="page" id="page-order-transmit" ng-if="show_transmit_page == true">
+
+		<div ng-show="transmit_status == 'inprogress'" ng-hide="transmit_status != 'inprogress'" style="text-align:center;">
+			<h2 translate="i18n_transmit_inprogress_title"></h2>
+			<br>
+			<br>
+			<div translate="i18n_transmit_inprogress_text"></div>
+			<div style="margin-top:70px;">
+				<img src="img/loader/loader_grey_256.gif" width="100" height="100">
+			</div>
+		</div>
+
+		<div ng-show="transmit_status == 'succeed'" ng-hide="transmit_status != 'succeed'" style="text-align:center;">
+			<h2 translate="i18n_transmit_succeed_title"></h2>
+			<br>
+			<br>
+			<div translate="i18n_transmit_succeed_text"></div>
+		</div>
+
+		<div ng-show="transmit_status == 'failed'" ng-hide="transmit_status != 'failed'" style="text-align:center;">
+			<h2 translate="i18n_transmit_failed_title"></h2>
+			<br>
+			<br>
+			<div translate="i18n_transmit_failed_text"></div>
+		</div>
+
+	</div>

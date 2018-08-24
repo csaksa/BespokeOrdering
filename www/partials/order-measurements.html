@@ -1,0 +1,27 @@
+
+	<div class="ngdialog-message">
+		<h3>{{ngDialogData.question}}</h3>
+	</div>
+
+	<br>
+	<br>
+	<table style="width:100%;">
+		<tr>
+			<td class="c" style="text-align:center;">
+
+				<center><select ng-model="ngDialogData.selected_measurements_id" class="form-control" style="max-width:195px;">
+					<option ng-repeat="measurements2 in ngDialogData.measurements" value="{{measurements2.id}}" ng-selected="ngDialogData.selected_measurements_id == measurements2.id">{{measurements2.date}}: {{measurements2.silhouette_weight}} {{measurements2.unit_weight}} (ID: {{measurements2.id}})</option>
+				</select></center>
+				<br>
+				<button ng-click="orderAsignMeasurementsToOrder(ngDialogData.selected_measurements_id); closeThisDialog();" class="btn btn-primary"><span translate="i18n_cart_measurements_usethisone"></span></button>
+
+			</td>
+			<td style="border-right:1px dotted #c0c0c0;">&nbsp;&nbsp;&nbsp;</td>
+			<td class="c">
+
+				<button ng-click="orderGoMeasurements(); closeThisDialog();" class="btn btn-primary"><span translate="i18n_cart_measurements_createnew"></span></button>
+
+			</td>
+		</tr>
+	</table>
+	<br>

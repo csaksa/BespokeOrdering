@@ -1,0 +1,138 @@
+
+	<div data-role="page" id="page-clients-new" class="container">
+
+		<form name="clientForm" ng-submit="clientsEditSubmit(clientForm.$valid)" novalidate>
+		<input type="hidden" name="id" class="form-control" value="{{clients[0].id}}">
+
+		<div class="row view-bar">
+
+			<div class="buttons">
+				<a class="btn btn-danger btn-lg" ng-click="clientEditCancel()"><i class="glyphicon glyphicon-share-alt glyphicon-flip-horizontal"></i> <span translate="i18n_client_btn_cancel"></span></a>
+				<button type="submit" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-ok"></i> <span translate="i18n_client_btn_save"></span></button>
+			</div><!-- ng-disabled="clientForm.$invalid"-->
+
+			<h2 ng-model="clients[0].fullname" class="txtonbg">{{clients[0].fullname}}</h2>
+
+			<div class="clear"></div>
+
+		</div>
+
+		<div class="row" style="margin-top:15px;">
+
+			<div class="col-xs-6 col-padding-2cols-left">
+
+				<div class="form-group">
+					<label translate="i18n_client_company" class="txtonbg"></label>
+					<input type="text" name="company" class="form-control capitalize" ng-model="client_company" autocomplete="off" autocorrect="off" spellcheck="false">
+				</div>
+
+				<div class="row">
+
+					<div class="col-xs-6">
+						<div class="form-group" ng-class="{'has-error' : clientForm.client_firstname.$error.required && !clientForm.client_firstname.$pristine}">
+							<label class="txtonbg">{{'i18n_client_firstname' | translate}} *</label>
+							<input type="text" name="client_firstname" class="form-control capitalize" ng-model="client_firstname" autocomplete="off" autocorrect="off" spellcheck="false" required>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group" ng-class="{'has-error' : clientForm.client_lastname.$error.required && !clientForm.client_lastname.$pristine}">
+							<label class="txtonbg">{{'i18n_client_lastname' | translate}} *</label>
+							<input type="text" name="client_lastname" class="form-control capitalize" ng-model="client_lastname" autocomplete="off" autocorrect="off" spellcheck="false" required>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="form-group">
+					<label class="txtonbg" translate="i18n_client_dob"></label>
+					<input type="date" class="form-control" id="client_dob" ng-model="client_dob">
+				</div>
+
+				<div class="form-group">
+					<label class="txtonbg" translate="i18n_client_phone"></label>
+					<input type="tel" class="form-control" id="client_databaseversion" ng-model="client_phone">
+				</div>
+
+				<div class="form-group">
+					<label class="txtonbg" translate="i18n_client_email"></label>
+					<input type="email" class="form-control" id="client_databaseversion" ng-model="client_email">
+				</div>
+
+			</div>
+
+			<div class="col-xs-6 col-padding-2cols-right">
+
+				<div class="form-group">
+					<label class="txtonbg" translate="i18n_client_street1"></label>
+					<input type="text" class="form-control" id="client_street1" ng-model="client_street1" autocomplete="off" autocorrect="off" spellcheck="false"><br>
+					<input type="text" class="form-control" id="client_street2" ng-model="client_street2" autocomplete="off" autocorrect="off" spellcheck="false" style="margin-top:-10px;">
+				</div>
+
+				<div class="row">
+
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="txtonbg" translate="i18n_client_city"></label>
+							<input type="text" class="form-control capitalize" id="client_city" ng-model="client_city" autocomplete="off" autocorrect="off" spellcheck="false">
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="txtonbg" translate="i18n_client_postalcode"></label>
+							<input type="text" class="form-control" id="client_postalcode" ng-model="client_postalcode" autocomplete="off" autocorrect="off" spellcheck="false">
+						</div>
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="txtonbg" translate="i18n_client_country"></label>
+							<select ng-model="client_country" class="form-control">
+								<option ng-repeat="country in countries" value="{{country.code}}">{{country.name}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="txtonbg" translate="i18n_client_state"></label>
+							<input type="text" class="form-control uppercase" id="client_state" ng-model="client_state" autocomplete="off" autocorrect="off" spellcheck="false">
+						</div>
+					</div>
+
+				</div>
+
+				<div class="row" style="margin-top:30px;">
+
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="txtonbg" translate="i18n_settings_applanguage"></label>
+							<select id="client_applanguage" ng-model="client_applanguage" class="form-control">
+								<option value="en_US" translate="i18n_settings_applanguage_en_US"></option>
+								<option value="en_UK" translate="i18n_settings_applanguage_en_UK"></option>
+								<option value="fr_FR" translate="i18n_settings_applanguage_fr_FR"></option>
+								<option value="es_ES" translate="i18n_settings_applanguage_es_ES"></option>
+							</select>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="txtonbg" translate="i18n_settings_currency"></label>
+							<select id="client_currency" ng-model="client_currency" class="form-control">
+								<option value="EUR">€</option>
+								<option value="USD">US$</option>
+							</select>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		</form>
+
+	</div>

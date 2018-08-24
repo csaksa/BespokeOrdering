@@ -1,0 +1,52 @@
+
+	<div data-role="page" id="page-purchases" class="container">
+
+		<div class="row view-bar">
+
+			<div class="filter-bar" style="display:inline-block;">
+
+				<form class="form-inline" style="padding-top:5px;">
+
+					<label><span translate="i18n_sales_filter_search"></span> <input type="search" class="form-control" ng-change="ordersDisplayOrders()" ng-model="orders_filter_search" placeholder="{{'i18n_sales_filter_search_placeholder' | translate}}"></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				</form>
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+		<table style="margin-top:30px;" ng-show="orders_total_orders > 0" class="table c">
+			<thead>
+				<tr>
+					<th translate="i18n_sales_label_client" class="l"></th>
+					<th translate="i18n_sales_label_ordernumber"></th>
+					<th translate="i18n_sales_label_ordereddate"></th>
+					<!--th translate="i18n_sales_label_expecteddeliverydate"></th>-->
+					<th translate="i18n_sales_label_shippeddate"></th>
+					<th translate="i18n_sales_label_delivereddate"></th>
+					<th translate="i18n_sales_label_nbrproducts"></th>
+					<th translate="i18n_sales_label_orderstatus"></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="order in ordersFiltered" style="background:rgba(0,0,0,.8);">
+					<td class="l">{{order.firstname}} {{order.lastname}} ({{order.client_id}})</td>
+					<td>{{order.order_number}}</td>
+					<td>{{order.ordered_date}}</td>
+					<!--<td>{{order.expected_delivery_date}}</td>-->
+					<td>{{order.shipped_date}}</td>
+					<td>{{order.delivered_date}}</td>
+					<td>{{order.nbr_products_2}}</td>
+					<td>{{order.order_status2}}</td>
+					<td><button ng-click="clientsDisplayOrderPanel(order.id)" class="btn btn-success"><i class="glyphicon glyphicon-eye-open"></i></button></td>
+				</tr>
+			</tbody>
+		</table>
+		<div ng-show="orders_total_orders > orders_perpage" style="position:absolute; bottom:5px; left:25px;"><uib-pagination data-ng-click="clientOrdersChangePage(orders_currentpage)" direction-links="false" total-items="orders_total_orders" items-per-page="orders_perpage" ng-model="orders_currentpage" num-pages="smallnumPages"></uib-pagination></div>
+
+		</div>
+
+	</div>

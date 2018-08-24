@@ -1,0 +1,61 @@
+
+	<div data-role="page" id="page-sales" class="container">
+
+		<div class="row view-bar">
+
+			<div class="filter-bar" style="display:inline-block;">
+
+				<form class="form-inline" style="padding-top:5px;">
+
+					<label><span translate="i18n_sales_filter_search"></span> <input type="search" class="form-control" ng-change="ordersDisplayOrders()" ng-model="orders_filter_search" placeholder="{{'i18n_sales_filter_search_placeholder' | translate}}"></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+					<label><span translate="i18n_sales_filter_cart"></span> <input type="checkbox" class="form-control" ng-change="ordersDisplayOrders()" ng-model="orders_filter_cart"></label>
+
+				</form>
+
+			</div>
+
+			<div class="buttons">
+				<a href="#/order" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-plus"></i> <span translate="i18n_sales_addnew"></span></a>
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<table ng-show="orders_total_orders > 0" class="table c">
+				<thead>
+					<tr>
+						<th translate="i18n_sales_label_client" class="l"></th>
+						<th translate="i18n_sales_label_ordernumber"></th>
+						<th translate="i18n_sales_label_ordereddate"></th>
+						<th translate="i18n_sales_label_delivereddate"></th>
+						<th translate="i18n_sales_label_nbrproducts"></th>
+						<th translate="i18n_sales_label_paymentstatus"></th>
+						<th translate="i18n_sales_label_orderstatus"></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="order in ordersFiltered">
+						<td class="l">{{order.firstname}} {{order.lastname}} ({{order.client_id}})</td>
+						<td>{{order.order_number}}</td>
+						<td>{{order.ordered_date}}</td>
+						<td>{{order.delivered_date}}</td>
+						<td>{{order.nbr_products_2}}</td>
+						<td>{{order.payment_status2}}</td>
+						<td>{{order.order_status2}}</td>
+						<td width="1" style="white-space:nowrap;">
+							<!--<a class="btn btn-danger" ng-class="order.order_status != 'cart' ? 'disabled':''" ng-click="clientsOrdersDeleteOrder(order.id)"><i class="glyphicon glyphicon-trash"></i></a>-->
+							<a href="#/order?client_id={{order.client_id}}&order_id={{order.id}}&opencart=1" class="btn btn-warning" ng-class="order.order_status != 'cart' ? 'disabled':''"><i class="glyphicon glyphicon-pencil"></i></a>
+							<!--<a class="btn btn-success"><i class="glyphicon glyphicon-duplicate"></i></a>-->
+							<button ng-click="clientsDisplayOrderPanel(order.id)" class="btn btn-success"><i class="glyphicon glyphicon-eye-open"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div ng-show="orders_total_orders > orders_perpage" style="position:absolute; bottom:5px; left:25px;"><uib-pagination data-ng-click="clientOrdersChangePage(orders_currentpage)" direction-links="false" total-items="orders_total_orders" items-per-page="orders_perpage" ng-model="orders_currentpage" num-pages="smallnumPages"></uib-pagination></div>
+
+		</div>
+
+	</div>

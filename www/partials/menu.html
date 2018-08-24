@@ -1,0 +1,24 @@
+
+	<div id="menu" class="modal-menu">
+
+		<a class="close2" ng-click="cancel()"><i class="glyphicon glyphicon-remove"></i></a>
+
+		<div class="modal-header">
+			<a href="#/" ng-click="cancel()"><span ng-show="logo_uri" class="logo-custom"><img id="logo" src="{{logo_uri}}"></span><span class="logo-default"></span></a>
+		</div>
+
+		<div class="modal-body">
+			<ul class="nav nav-pills nav-stacked">
+				<li><a href="#/clients" ng-click="cancel()" class="btn btn-primary"><i class="glyphicon glyphicon glyphicon-user"></i> &nbsp;<span translate="i18n_menu_clients"></span></a></li>
+				<li><a href="#/sales?do=sales" ng-click="cancel()" class="btn btn-primary"><i class="glyphicon" ng-class="theme_currency"></i> &nbsp;<span translate="i18n_menu_sales"></span></a></li>
+				<li><a href="#/purchases?do=purchases" ng-click="cancel()" class="btn btn-primary"><i class="glyphicon glyphicon glyphicon-tags"></i> &nbsp;<span translate="i18n_menu_purchases"></span></a></li>
+				<li><a href="#/" class="btn btn-primary disabled"><i class="glyphicon glyphicon glyphicon-file"></i> &nbsp;<span translate="i18n_menu_accounting"></span></a></li>
+				<li><a href="#/" class="btn btn-primary disabled"><i class="glyphicon glyphicon glyphicon-stats"></i> &nbsp;<span translate="i18n_menu_reporting"></span></a></li>
+				<li><a href="#/settings" ng-click="cancel()" class="btn btn-primary"><i class="glyphicon glyphicon glyphicon-cog"></i> &nbsp;<span translate="i18n_menu_settings"></span></a></li>
+			</ul>
+		</div>
+
+		<div class="modal-footer">
+		</div>
+
+	</div>
