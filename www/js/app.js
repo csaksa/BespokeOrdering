@@ -321,9 +321,9 @@ tx.executeSql("UPDATE config SET value = '0.5.3' WHERE name = 'database_version'
 							},
 							tx_error,
 							function(){
-								$rootScope.settings_product_key = response.data.licence.product_key;
-								settings['company_id'] = response.data.licence.company_id;
-								settings['seller_id'] = response.data.licence.seller_id;
+								$rootScope.settings_product_key = $scope.submit_product_key;
+								settings['company_id'] = $scope.submit_company_id;
+								settings['seller_id'] = $scope.submit_resseller_id;
 								$scope.show_productkey_form = false;
 								$scope.$apply();
 

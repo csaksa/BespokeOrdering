@@ -314,116 +314,22 @@ tx.executeSql("UPDATE config SET value = '0.5.3' WHERE name = 'database_version'
 		 * On first launch, check the product key
 		 */
 		$scope.installSubmitProductKey = function() {
-
-			console.log('');
-			console.log('FN installSubmitProductKey > start');
-
-			console.log($scope.submit_product_key);
-
-			// Check internet connection
-			if (navigator.connection == undefined)
-				var networkState = 'WIFI';
-			else
-				var networkState = navigator.connection.type;
-			if ( networkState == "NONE" ||
-				 networkState == "none" ||
-				 networkState == "CELL" ||
-				 networkState == "cell" ) {
-
-				ngDialog.open({
-					template: 'partials/dialog-msg.html',
-					data: {question: $translate.instant('i18n_common_needconnection')},
-					className: 'ngdialog-theme-default'
-				});
-				console.log('FN installSubmitProductKey > Failed: no internet connection');
-
-			} else {
-
-				var gateway = 'http://gateway.probespoke.com/product_key.php';
-
-				$scope.xml_data_submit = {};
-				$scope.xml_data_submit.product_key = $scope.submit_product_key;
-				//$scope.xml_data_submit.device_uuid = device.uuid;
-				$scope.xml_data_submit.device_uuid = 'unknown device uuid';
-
-				$http({
-					method: 'POST',
-					url: gateway,
-					data: $scope.xml_data_submit
-				}).
-				then(function(response) {
-
-					if (response.data.errors) {
-
-						ngDialog.open({
-							template: 'partials/dialog-msg.html',
-							data: {question: 'Wrong product key, please try again or contact your account manager.'},
-							className: 'ngdialog-theme-default'
-						});
-						console.log( JSON.stringify(response.data.errors) );
-
-					} else {
-
-						// Check Product Key if available
-						if (response.data.licence.company_id != undefined) {
-
-							console.log( response.data.licence.product_key );
-							console.log( response.data.licence.company_id );
-							console.log( response.data.licence.company_name );
-							console.log( response.data.licence.seller_id );
-							console.log( response.data.licence.seller_fullname );
-
 							db.transaction(function(tx) {
-								tx.executeSql("UPDATE config SET value = '" + response.data.licence.product_key + "' WHERE name = 'product_key'", [], tx_result, tx_error);
-								tx.executeSql("UPDATE config SET value = '" + response.data.licence.company_id + "' WHERE name = 'company_id'", [], tx_result, tx_error);
-								tx.executeSql("UPDATE config SET value = '" + response.data.licence.company_name + "' WHERE name = 'company_name'", [], tx_result, tx_error);
-								tx.executeSql("UPDATE config SET value = '" + response.data.licence.seller_id + "' WHERE name = 'seller_id'", [], tx_result, tx_error);
-								tx.executeSql("UPDATE config SET value = '" + response.data.licence.seller_fullname + "' WHERE name = 'seller_fullname'", [], tx_result, tx_error);
-
+								tx.executeSql("UPDATE config SET value = '" + $scope.submit_product_key + "' WHERE name = 'product_key'", [], tx_result, tx_error);
+								tx.executeSql("UPDATE config SET value = '" + $scope.submit_resseller_id + "' WHERE name = 'company_id'", [], tx_result, tx_error);
+								tx.executeSql("UPDATE config SET value = '" + $scope.submit_company_id + "' WHERE name = 'seller_id'", [], tx_result, tx_error);
 							},
 							tx_error,
 							function(){
-
-								// Assign Product Key to settings
-								$rootScope.settings_product_key = response.data.licence.product_key;
-								settings['company_id'] = response.data.licence.company_id;
-								settings['seller_id'] = response.data.licence.seller_id;
+								$rootScope.settings_product_key = $scope.submit_product_key;
+								settings['company_id'] = $scope.submit_company_id;
+								settings['seller_id'] = $scope.submit_resseller_id;
 								$scope.show_productkey_form = false;
 								$scope.$apply();
 
 								console.log('FN installSubmitProductKey > Succeed: Product Key & Company details checked and saved to database');
-
 							});
-
 						}
-						// Write wrong product key
-						else {
-
-							ngDialog.open({
-								template: 'partials/dialog-msg.html',
-								data: {question: 'Wrong product key, please try again or contact your account manager.'},
-								className: 'ngdialog-theme-default'
-							});
-							console.log('FN installSubmitProductKey > Failed: wrong Product Key');
-							console.log( JSON.stringify(response.data) );
-
-						}
-					}
-
-				}, function(response) {
-
-					ngDialog.open({
-						template: 'partials/dialog-msg.html',
-						data: {question: 'Cannot reach gateway, please try again or contact your account manager.'},
-						className: 'ngdialog-theme-default'
-					});
-					console.log('FN installSubmitProductKey > Failed: cannot reach gateway');
-
-				})
-
-			}
-
-		}
 
 	// DB > Check database version, install or update if required
 		$scope.db_install = function() {
@@ -436,19 +342,6 @@ tx.executeSql("UPDATE config SET value = '0.5.3' WHERE name = 'database_version'
 						var len = results.rows.length;
 						if (len == 0) {
 
-							/*var filename = 'install/'+i+'.sql.json';
-							$http.get(filename).success(function(data) {
-
-								for (var j = 0; j < data.length; j++){
-									var sql = data[j];
-
-									db.transaction(function(tx) {
-										tx.executeSql(sql, [], tx_result, tx_error);
-									});
-
-								}
-
-							});*/
 						}
 						else {
 
