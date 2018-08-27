@@ -307,7 +307,7 @@ tx.executeSql("UPDATE config SET value = '0.5.3' WHERE name = 'database_version'
 
 		$rootScope.orderCartShow = false;
 		$rootScope.settings_product_key = '';
-
+    $scope.show_productkey_form = false;
 
 
 		/*

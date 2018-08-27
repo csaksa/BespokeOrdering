@@ -1,15 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Probespoke Ordering</name>
-    <description>
-        Hello World sample application that responds to the deviceready event.
-    </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
-    </author>
+  <name>Bespoke Ordering</name>
+	<description>
+		Bespoke Ordering app by Bespoke RD for PRO BESPOKE.
+	</description>
+	<author email="info@bespokerd.com" href="http://bespokerd.com">
+		Bespoke RD
+	</author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
+    <preference name="orientation" value="landscape" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-console" source="npm" spec="~1.0.2" />
@@ -53,10 +54,6 @@
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
